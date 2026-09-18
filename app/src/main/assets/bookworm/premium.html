@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <meta name="mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="theme-color" content="#0a0a0a"/>
+  <title>Book Worm – Premium</title>
+  <link rel="manifest" href="manifest.json"/>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    /* ── Premium page local styles ── */
+    .prem-hero {
+      background: linear-gradient(135deg, #1a1200 0%, #2d1f00 50%, #111 100%);
+      border-bottom: 1px solid #3d2e00;
+      padding: 28px 18px 24px;
+      text-align: center;
+    }
+    .prem-crown { font-size: 48px; margin-bottom: 10px; }
+    .prem-hero-title {
+      font-size: 24px; font-weight: 800; color: #fff; margin-bottom: 6px;
+      background: linear-gradient(90deg, #f5c842, #e8943a);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .prem-hero-sub { font-size: 14px; color: #aaa; line-height: 1.5; }
+
+    .prem-active-banner {
+      margin: 14px 14px 0;
+      background: linear-gradient(135deg, #1a2e00, #223800);
+      border: 1px solid rgba(76,175,80,.4);
+      border-radius: 12px;
+      padding: 14px 16px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .prem-active-icon { font-size: 28px; }
+    .prem-active-label { font-size: 13px; color: #4caf50; font-weight: 700; }
+    .prem-active-detail { font-size: 12px; color: #aaa; margin-top: 2px; }
+    .prem-cancel-link { margin-left: auto; font-size: 11px; color: #e74c3c; cursor: pointer; border: 1px solid rgba(231,76,60,.3); padding: 4px 10px; border-radius: 6px; }
+
+    .prem-section-title {
+      font-size: 13px; font-weight: 700; color: #aaa;
+      text-transform: uppercase; letter-spacing: 1px;
+      padding: 18px 18px 8px;
+    }
+
+    /* Perks list */
+    .prem-perks { padding: 0 14px 4px; display: flex; flex-direction: column; gap: 10px; }
+    .perk-row {
+      display: flex; align-items: center; gap: 14px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 14px;
+    }
+    .perk-icon { font-size: 26px; flex-shrink: 0; }
+    .perk-text-title { font-size: 14px; font-weight: 700; color: #fff; }
+    .perk-text-sub { font-size: 12px; color: #aaa; margin-top: 2px; }
+    .perk-badge {
+      margin-left: auto; flex-shrink: 0;
+      background: rgba(245,200,66,.12);
+      color: #f5c842;
+      border: 1px solid rgba(245,200,66,.3);
+      font-size: 10px; font-weight: 700;
+      padding: 3px 8px; border-radius: 20px;
+    }
+
+    /* Plan cards */
+    .prem-plans { padding: 0 14px; display: flex; flex-direction: column; gap: 12px; }
+    .plan-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 14px; padding: 18px; position: relative; cursor: pointer;
+      transition: border-color .15s;
+    }
+    .plan-card.popular {
+      border-color: #f5c842;
+      background: linear-gradient(135deg, #1c1600, #111);
+    }
+    .plan-card.selected { border-color: #e8943a; }
+    .plan-popular-tag {
+      position: absolute; top: -1px; right: 18px;
+      background: #f5c842; color: #000;
+      font-size: 10px; font-weight: 800;
+      padding: 3px 10px; border-radius: 0 0 8px 8px;
+      text-transform: uppercase; letter-spacing: .5px;
+    }
+    .plan-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+    .plan-name { font-size: 16px; font-weight: 800; color: #fff; }
+    .plan-radio {
+      width: 20px; height: 20px; border-radius: 50%;
+      border: 2px solid var(--border); background: transparent;
+      flex-shrink: 0; position: relative; transition: border-color .15s;
+    }
+    .plan-card.selected .plan-radio { border-color: var(--orange); }
+    .plan-card.selected .plan-radio::after {
+      content: ''; position: absolute; top: 3px; left: 3px;
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--orange);
+    }
+    .plan-price { margin-bottom: 6px; }
+    .plan-price-main { font-size: 26px; font-weight: 900; color: #fff; }
+    .plan-price-period { font-size: 13px; color: #888; }
+    .plan-price-old { font-size: 12px; color: #888; text-decoration: line-through; margin-left: 6px; }
+    .plan-save-badge {
+      display: inline-block; background: rgba(76,175,80,.15); color: #4caf50;
+      border: 1px solid rgba(76,175,80,.3); border-radius: 20px;
+      font-size: 10px; font-weight: 700; padding: 2px 8px; margin-left: 6px;
+    }
+    .plan-features { margin-top: 10px; display: flex; flex-direction: column; gap: 5px; }
+    .plan-feat { font-size: 12px; color: #aaa; display: flex; align-items: center; gap: 6px; }
+    .plan-feat::before { content: '✓'; color: #4caf50; font-weight: 700; flex-shrink: 0; }
+
+    /* CTA */
+    .prem-cta-wrap { padding: 18px 14px 10px; }
+    .prem-cta-btn {
+      width: 100%; padding: 15px;
+      background: linear-gradient(90deg, #f5c842, #e8943a);
+      color: #000; font-size: 16px; font-weight: 800;
+      border: none; border-radius: 12px; cursor: pointer;
+      letter-spacing: .3px;
+    }
+    .prem-cta-note { text-align: center; font-size: 11px; color: #666; margin-top: 8px; }
+
+    /* Exclusive coupons */
+    .prem-coupons { padding: 0 14px; display: flex; flex-direction: column; gap: 10px; }
+    .coupon-card {
+      background: var(--surface); border: 1px dashed #3a2e00;
+      border-radius: 12px; padding: 14px 16px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .coupon-card.locked { opacity: .5; filter: blur(1px); pointer-events: none; }
+    .coupon-code-badge {
+      background: rgba(245,200,66,.12); border: 1px solid rgba(245,200,66,.3);
+      color: #f5c842; font-size: 13px; font-weight: 800;
+      padding: 6px 12px; border-radius: 8px; letter-spacing: 1px; flex-shrink: 0;
+    }
+    .coupon-info-title { font-size: 13px; font-weight: 700; color: #fff; }
+    .coupon-info-sub { font-size: 11px; color: #aaa; margin-top: 2px; }
+    .coupon-copy-btn {
+      margin-left: auto; flex-shrink: 0;
+      background: transparent; border: 1px solid var(--border);
+      color: #aaa; font-size: 11px; padding: 5px 10px; border-radius: 6px; cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-brand-wrap">
+      <div class="nav-grid-icon">
+        <span></span><span></span><span></span>
+        <span></span><span></span><span></span>
+        <span></span><span></span><span></span>
+      </div>
+      <span class="nav-brand" onclick="window.location.href='index.html'">Book Worm</span>
+    </div>
+    <div class="nav-spacer"></div>
+    <div class="nav-right-icons">
+      <a href="cart.html" class="nav-icon-btn" title="Cart">
+        🛒<span class="nav-badge" id="cartBadge" style="display:none">0</span>
+      </a>
+      <div class="user-dd-wrap">
+        <button class="nav-profile-btn" onclick="toggleDD()" title="Profile">
+          <span class="nav-avatar" id="navAvatar">U</span>
+        </button>
+        <div class="user-dd-menu" id="userMenu">
+          <div class="user-dd-profile">
+            <div class="udp-avatar" id="udpAvatar">U</div>
+            <div class="udp-info">
+              <div class="udp-name" id="uName">User</div>
+              <div class="udp-email" id="uEmail"></div>
+              <div id="udpPremBadge" style="display:none"></div>
+            </div>
+          </div>
+          <div class="user-dd-links">
+            <a href="orders.html">📦 My Orders</a>
+            <a href="wishlist.html">🤍 Wishlist</a>
+            <a href="premium.html">👑 Premium</a>
+            <a href="#" class="ud-signout" onclick="doLogout()">⎋ Sign Out</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="page-body" style="padding-bottom: calc(var(--bottom-h) + 20px + var(--safe-bottom))">
+
+    <!-- Hero -->
+    <div class="prem-hero">
+      <div class="prem-crown">👑</div>
+      <div class="prem-hero-title">Book Worm Premium</div>
+      <div class="prem-hero-sub">Unlock exclusive books, free delivery on every order,<br>and members-only coupons.</div>
+    </div>
+
+    <!-- Active plan banner (shown only if subscribed) -->
+    <div id="premActiveBanner" style="display:none"></div>
+
+    <!-- Perks -->
+    <div class="prem-section-title">What you get</div>
+    <div class="prem-perks">
+      <div class="perk-row">
+        <div class="perk-icon">🚀</div>
+        <div><div class="perk-text-title">Free Delivery — Always</div><div class="perk-text-sub">No minimum order. Every order ships free.</div></div>
+        <div class="perk-badge">PERK</div>
+      </div>
+      <div class="perk-row">
+        <div class="perk-icon">🔐</div>
+        <div><div class="perk-text-title">Premium Books</div><div class="perk-text-sub">Access 15+ exclusive titles unavailable to free users.</div></div>
+        <div class="perk-badge">PERK</div>
+      </div>
+      <div class="perk-row">
+        <div class="perk-icon">🎟️</div>
+        <div><div class="perk-text-title">Members-Only Coupons</div><div class="perk-text-sub">Unlock PREM200, PREM500 & monthly surprise codes.</div></div>
+        <div class="perk-badge">PERK</div>
+      </div>
+      <div class="perk-row">
+        <div class="perk-icon">⚡</div>
+        <div><div class="perk-text-title">Early Access</div><div class="perk-text-sub">Shop new launches 48 hours before everyone else.</div></div>
+        <div class="perk-badge">PERK</div>
+      </div>
+      <div class="perk-row">
+        <div class="perk-icon">💎</div>
+        <div><div class="perk-text-title">Priority Support</div><div class="perk-text-sub">Skip the queue — get help within 2 hours.</div></div>
+        <div class="perk-badge">PERK</div>
+      </div>
+    </div>
+
+    <!-- Plans -->
+    <div class="prem-section-title">Choose your plan</div>
+    <div class="prem-plans" id="premPlans">
+      <div class="plan-card" id="plan-monthly" onclick="selectPlan('monthly')">
+        <div class="plan-header">
+          <div class="plan-name">Monthly</div>
+          <div class="plan-radio"></div>
+        </div>
+        <div class="plan-price">
+          <span class="plan-price-main">₹149</span>
+          <span class="plan-price-period">/ month</span>
+        </div>
+        <div class="plan-features">
+          <div class="plan-feat">All premium perks</div>
+          <div class="plan-feat">Cancel anytime</div>
+          <div class="plan-feat">Billed monthly</div>
+        </div>
+      </div>
+
+      <div class="plan-card popular selected" id="plan-annual" onclick="selectPlan('annual')">
+        <div class="plan-popular-tag">⭐ Most Popular</div>
+        <div class="plan-header">
+          <div class="plan-name">Annual</div>
+          <div class="plan-radio"></div>
+        </div>
+        <div class="plan-price">
+          <span class="plan-price-main">₹999</span>
+          <span class="plan-price-period">/ year</span>
+          <span class="plan-price-old">₹1,788</span>
+          <span class="plan-save-badge">Save 44%</span>
+        </div>
+        <div class="plan-features">
+          <div class="plan-feat">All premium perks</div>
+          <div class="plan-feat">2 months free</div>
+          <div class="plan-feat">Best value</div>
+        </div>
+      </div>
+
+      <div class="plan-card" id="plan-lifetime" onclick="selectPlan('lifetime')">
+        <div class="plan-header">
+          <div class="plan-name">Lifetime</div>
+          <div class="plan-radio"></div>
+        </div>
+        <div class="plan-price">
+          <span class="plan-price-main">₹2,499</span>
+          <span class="plan-price-period"> one-time</span>
+          <span class="plan-price-old">₹4,999</span>
+          <span class="plan-save-badge">Save 50%</span>
+        </div>
+        <div class="plan-features">
+          <div class="plan-feat">All premium perks forever</div>
+          <div class="plan-feat">Pay once, never again</div>
+          <div class="plan-feat">Includes future perks</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="prem-cta-wrap" id="premCtaWrap">
+      <button class="prem-cta-btn" onclick="subscribePremium()">Get Premium →</button>
+      <div class="prem-cta-note">Secure payment · Cancel anytime · Instant activation</div>
+    </div>
+
+    <!-- Exclusive coupons (visible to premium users only) -->
+    <div class="prem-section-title">Your Exclusive Coupons</div>
+    <div class="prem-coupons" id="premCoupons"></div>
+    <div style="height:14px"></div>
+
+  </div>
+
+  <nav class="bottom-nav">
+    <a href="index.html"    class="bn-tab"><span class="bn-icon">🏠</span><span class="bn-label">Home</span></a>
+    <a href="orders.html"   class="bn-tab"><span class="bn-icon">📦</span><span class="bn-label">Orders</span></a>
+    <a href="wishlist.html" class="bn-tab"><span class="bn-icon">🤍</span><span class="bn-label">Wishlist</span></a>
+    <a href="cart.html"     class="bn-tab"><span class="bn-icon">🛒</span><span class="bn-label">Cart</span></a>
+    <a href="premium.html"  class="bn-tab active"><span class="bn-icon">👑</span><span class="bn-label">Premium</span></a>
+  </nav>
+
+  <div id="toast"></div>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+  <script>
+    requireAuth();
+    initNavbar();
+
+    const PLANS = {
+      monthly:  { label: 'Monthly',  price: '₹149/mo',   duration: 30,     days: 30   },
+      annual:   { label: 'Annual',   price: '₹999/yr',   duration: 365,    days: 365  },
+      lifetime: { label: 'Lifetime', price: '₹2,499',    duration: 999999, days: 99999 }
+    };
+
+    let selectedPlan = 'annual';
+
+    function selectPlan(p) {
+      selectedPlan = p;
+      document.querySelectorAll('.plan-card').forEach(c => c.classList.remove('selected'));
+      document.getElementById('plan-' + p).classList.add('selected');
+    }
+
+    function subscribePremium() {
+      const plan = PLANS[selectedPlan];
+      // Save pending plan and go to payment — don't activate yet
+      localStorage.setItem('bw_prem_pending', JSON.stringify({
+        plan: selectedPlan, label: plan.label, price: plan.price, days: plan.days
+      }));
+      window.location.href = 'premium-payment.html';
+    }
+
+    function cancelPremium() {
+      if (!confirm('Cancel your premium subscription?')) return;
+      localStorage.removeItem('bw_premium');
+      showToast('Premium cancelled.');
+      renderPremiumState();
+    }
+
+    function renderPremiumState() {
+      const prem = isPremium();
+      const banner = document.getElementById('premActiveBanner');
+      const ctaWrap = document.getElementById('premCtaWrap');
+      const plans   = document.getElementById('premPlans');
+      const coupons = document.getElementById('premCoupons');
+
+      if (prem) {
+        const info = JSON.parse(localStorage.getItem('bw_premium'));
+        const expDate = info.days === 99999 ? 'Lifetime' :
+          new Date(info.expiry).toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' });
+        banner.style.display = 'flex';
+        banner.innerHTML = `
+          <div class="prem-active-icon">👑</div>
+          <div>
+            <div class="prem-active-label">Premium Active</div>
+            <div class="prem-active-detail">${info.label} plan · ${info.price}${info.plan !== 'lifetime' ? ' · Renews ' + expDate : ' · Never expires'}</div>
+          </div>
+          <span class="prem-cancel-link" onclick="cancelPremium()">Cancel</span>`;
+        ctaWrap.style.display = 'none';
+        plans.style.opacity = '.4';
+        plans.style.pointerEvents = 'none';
+
+        // Show exclusive coupons
+        coupons.innerHTML = [
+          { code: 'PREM200',   desc: '₹200 off on orders above ₹799',  valid: 'Valid this month' },
+          { code: 'PREM500',   desc: '₹500 off on orders above ₹1999', valid: 'Valid till Dec 2025' },
+          { code: 'FREESHIP',  desc: 'Free delivery — always applied',  valid: 'Auto-applied' },
+          { code: 'WELCOME50', desc: '50% off your next order',         valid: 'One-time use' }
+        ].map(c => `
+          <div class="coupon-card">
+            <div class="coupon-code-badge">${c.code}</div>
+            <div><div class="coupon-info-title">${c.desc}</div><div class="coupon-info-sub">${c.valid}</div></div>
+            <button class="coupon-copy-btn" onclick="copyCoupon('${c.code}')">Copy</button>
+          </div>`).join('');
+      } else {
+        banner.style.display = 'none';
+        ctaWrap.style.display = 'block';
+        plans.style.opacity = '';
+        plans.style.pointerEvents = '';
+
+        // Show blurred locked coupons
+        coupons.innerHTML = [
+          { code: 'PREM200',   desc: '₹200 off — Premium only' },
+          { code: 'PREM500',   desc: '₹500 off — Premium only' },
+          { code: 'FREESHIP',  desc: 'Free delivery — Premium only' },
+          { code: 'WELCOME50', desc: '50% off — Premium only' }
+        ].map(c => `
+          <div class="coupon-card locked">
+            <div class="coupon-code-badge">${c.code}</div>
+            <div><div class="coupon-info-title">${c.desc}</div><div class="coupon-info-sub">🔒 Subscribe to unlock</div></div>
+          </div>`).join('');
+      }
+    }
+
+    function copyCoupon(code) {
+      navigator.clipboard?.writeText(code).catch(() => {});
+      showToast(`Coupon ${code} copied! ✓`);
+    }
+
+    renderPremiumState();
+  </script>
+</body>
+</html>

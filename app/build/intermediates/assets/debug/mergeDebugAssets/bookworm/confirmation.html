@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <meta name="mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="theme-color" content="#0a0a0a"/>
+  <title>Book Worm – Order Confirmed!</title>
+  <link rel="manifest" href="manifest.json"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body class="payment-page">
+
+  <nav class="navbar">
+    <div class="nav-brand-wrap">
+      <div class="nav-grid-icon">
+        <span></span><span></span><span></span>
+        <span></span><span></span><span></span>
+        <span></span><span></span><span></span>
+      </div>
+      <span class="nav-brand" onclick="window.location.href='index.html'">Book Worm</span>
+    </div>
+    <div class="nav-spacer"></div>
+    <div class="nav-right-icons">
+      <a href="cart.html" class="nav-icon-btn" title="Cart">
+        🛒<span class="nav-badge" id="cartBadge" style="display:none">0</span>
+      </a>
+    </div>
+  </nav>
+
+  <div class="payment-bg">
+    <div class="float-book book-1">📗</div>
+    <div class="float-book book-2">📘</div>
+    <div class="float-book book-3">📙</div>
+    <div class="float-book book-4">📕</div>
+    <div class="float-book book-5">📚</div>
+    <div class="float-book book-6">📖</div>
+    <div class="shape-diamond d1">◆</div>
+    <div class="shape-diamond d2">◆</div>
+    <div class="shape-circle c1"></div>
+    <div class="shape-circle c2"></div>
+  </div>
+
+  <div class="page-body">
+    <div class="payment-modal-wrapper">
+      <div class="payment-modal confirmation-modal">
+        <div class="confirm-icon">✅</div>
+        <h3 class="confirm-title">Your purchase of the<br/>following reads is successful</h3>
+        <div id="confirmedItems" class="confirmed-items-grid"></div>
+        <div class="gift-earned" id="giftEarned" style="display:none"></div>
+        <button class="btn-primary" onclick="window.location.href='index.html'" style="width:100%;padding:14px;border-radius:10px;font-size:15px;font-weight:700;border:none;cursor:pointer;background:var(--orange);color:#fff">Continue Shopping →</button>
+      </div>
+    </div>
+  </div>
+
+  <nav class="bottom-nav">
+    <a href="index.html"    class="bn-tab"><span class="bn-icon">🏠</span><span class="bn-label">Home</span></a>
+    <a href="orders.html"   class="bn-tab"><span class="bn-icon">📦</span><span class="bn-label">Orders</span></a>
+    <a href="wishlist.html" class="bn-tab"><span class="bn-icon">🤍</span><span class="bn-label">Wishlist</span></a>
+    <a href="cart.html"     class="bn-tab"><span class="bn-icon">🛒</span><span class="bn-label">Cart</span></a>
+    <a href="premium.html"  class="bn-tab" id="premTab"><span class="bn-icon">👑</span><span class="bn-label">Premium</span></a>
+  </nav>
+
+  <div id="toast"></div>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+  <script>
+    initConfirmation();
+    const earned = parseInt(localStorage.getItem('bw_gift_points') || '0');
+    const ge = document.getElementById('giftEarned');
+    if (earned > 0 && ge) {
+      ge.innerHTML = `🎁 You earned <strong>${earned}</strong> Gift Points on this purchase!`;
+      ge.style.display = 'block';
+    }
+  </script>
+</body>
+</html>

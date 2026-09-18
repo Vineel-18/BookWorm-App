@@ -1,0 +1,13 @@
+R_DEF: Internal format may change without notice
+local
+color background
+color orange
+drawable ic_launcher_background
+drawable ic_splash_crown
+id webView
+layout activity_main
+mipmap ic_launcher
+mipmap ic_launcher_round
+string app_name
+style Theme.BookWorm
+style Theme.BookWorm.Splash

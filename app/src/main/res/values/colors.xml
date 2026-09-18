@@ -1,0 +1,5 @@
+<resources>
+    <!-- Dark background matching the website's #0a0a0a -->
+    <color name="background">#0A0A0A</color>
+    <color name="orange">#E8943A</color>
+</resources>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="background">#0A0A0A</color>
+    <color name="orange">#E8943A</color>
+    <string name="app_name">Book Worm</string>
+    <style name="Theme.BookWorm" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowBackground">@color/background</item>
+        <item name="android:statusBarColor">@color/background</item>
+        <item name="android:navigationBarColor">@color/background</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">false</item>
+    </style>
+    <style name="Theme.BookWorm.Splash" parent="Theme.BookWorm">
+        <item name="android:windowSplashScreenBackground">@color/background</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/ic_splash_crown</item>
+        <item name="postSplashScreenTheme">@style/Theme.BookWorm</item>
+    </style>
+</resources>

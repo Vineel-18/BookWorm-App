@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Dark background -->
+    <path
+        android:fillColor="#0A0A0A"
+        android:pathData="M0,0 L108,0 L108,108 L0,108 Z"/>
+    <!-- Crown body in orange -->
+    <path
+        android:fillColor="#E8943A"
+        android:pathData="M20,72 L30,42 L44,58 L54,32 L64,58 L78,42 L88,72 Z"/>
+    <!-- Crown dot left (circle as path) -->
+    <path
+        android:fillColor="#F5C842"
+        android:pathData="M30,36 A4,4,0,1,1,29.999,36 Z"/>
+    <!-- Crown dot centre (circle as path) -->
+    <path
+        android:fillColor="#F5C842"
+        android:pathData="M54,26 A4,4,0,1,1,53.999,26 Z"/>
+    <!-- Crown dot right (circle as path) -->
+    <path
+        android:fillColor="#F5C842"
+        android:pathData="M78,36 A4,4,0,1,1,77.999,36 Z"/>
+</vector>

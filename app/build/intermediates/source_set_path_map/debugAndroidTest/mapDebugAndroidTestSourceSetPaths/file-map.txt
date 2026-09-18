@@ -1,0 +1,4 @@
+com.bookworm.app.test.app-androidTest-0 C:\Users\OmkaramSaiVineelVard\.bob\playground\BookWormApp\app\build\generated\res\resValues\androidTest\debug
+com.bookworm.app.test.app-mergeDebugAndroidTestResources-1 C:\Users\OmkaramSaiVineelVard\.bob\playground\BookWormApp\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
+com.bookworm.app.test.app-mergeDebugAndroidTestResources-2 C:\Users\OmkaramSaiVineelVard\.bob\playground\BookWormApp\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
+com.bookworm.app.test.app-debugAndroidTest-3 C:\Users\OmkaramSaiVineelVard\.bob\playground\BookWormApp\app\build\intermediates\merged_res\debugAndroidTest\mergeDebugAndroidTestResources
